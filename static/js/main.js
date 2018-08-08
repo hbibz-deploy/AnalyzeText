@@ -18,9 +18,12 @@ textArea = $("#InputText")
 $(textArea).on("keyup", () => {
     delay(()=>{
         socket.send(textArea.val())
-    }, 2000)
+    }, 2000);
 })
 
 socket.on("message", (msg) => {
-    console.log(msg)
+    console.log(msg);
+    $('#result').html("HeadLine Results: "+msg['headline_results']
+                    +"<br>"+"Sentiment: "+parseFloat(msg['sentiment']).toFixed(4)
+                    +"<br>"+"Subjectivity: "+parseFloat(msg['subjectivity'])).toFixed(4);
 })
